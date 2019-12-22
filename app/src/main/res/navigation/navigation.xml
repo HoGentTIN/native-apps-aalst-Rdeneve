@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nagivation"
+    app:startDestination="@id/campaign">
+
+    <fragment
+        android:id="@+id/campaign"
+        android:name="com.example.dmtool.campaigns.fragments.Campaign"
+        android:label="campaign_fragment"
+        tools:layout="@layout/campaign_fragment" />
+</navigation>
