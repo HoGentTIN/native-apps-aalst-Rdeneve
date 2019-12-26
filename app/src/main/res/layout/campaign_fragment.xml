@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="campaignViewModel"
+            type="com.example.dmtool.campaigns.viewModels.CampaignViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,12 +17,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Campaign Title" />
+            android:id="@+id/title"
+            android:text="@{campaignViewModel.title}"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Campaign Description" />
+            android:id="@+id/description"
+            android:text="@{campaignViewModel.description}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Text"
+            android:id="@+id/button"/>
+
 
     </LinearLayout>
 </layout>
