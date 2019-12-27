@@ -20,4 +20,7 @@ interface CampaignDao  {
 
     @Delete
     fun delete(campaign: Campaign)
+
+    @Query("DELETE FROM Campaign")
+    fun clear()
 }

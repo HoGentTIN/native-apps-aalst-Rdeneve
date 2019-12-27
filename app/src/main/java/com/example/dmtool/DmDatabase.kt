@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.dmtool.campaigns.database.Campaign
 import com.example.dmtool.campaigns.database.CampaignDao
+import java.util.concurrent.Executors
 
-@Database(entities = [Campaign::class], version = 2, exportSchema = false)
+@Database(entities = [Campaign::class], version = 3, exportSchema = false)
 abstract class DmDatabase : RoomDatabase() {
     abstract val campaignDao: CampaignDao
 
@@ -32,5 +34,7 @@ abstract class DmDatabase : RoomDatabase() {
                 return instance
             }
         }
+
+
     }
 }
