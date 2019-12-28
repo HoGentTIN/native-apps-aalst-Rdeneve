@@ -21,9 +21,6 @@ import com.example.dmtool.databinding.FragmentCampaignBinding
 
 class CampaignFragment : Fragment() {
 
-    /* companion object {
-        fun newInstance() = Campaign()
-    }*/
     private lateinit var viewModelFactory: CampaignViewModelFactory
     private lateinit var viewModel: CampaignViewModel
 
@@ -46,7 +43,7 @@ class CampaignFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.campaignViewModel = viewModel
 
-        //Adapter voor recyccler view met click listener voor navigatie naar NpcFragment
+        //Adapter voor recycler view met click listener voor navigatie naar NpcFragment
         val adapter = CampaignAdapter(CampaignListClickListener {
             campaignId -> viewModel.onCampaignClicked(campaignId)
         })
@@ -58,6 +55,14 @@ class CampaignFragment : Fragment() {
                     CampaignFragmentDirections.actionCampaignToNpcFragment(campaign)
                 )
                 viewModel.onNpcNavigated()
+            }
+        })
+        viewModel.navigateToCreate.observe(this, Observer { isClicked ->
+            isClicked?.let {
+                this.findNavController().navigate(
+                    CampaignFragmentDirections.actionCampaignToCreateCampaignFragment()
+                )
+                viewModel.onCreateNavigated()
             }
         })
 

@@ -11,41 +11,8 @@ class CampaignViewModel(
     val database: CampaignDao,
     application: Application
 ) : AndroidViewModel(application) {
-    var campaign = MutableLiveData<Campaign?>()
     var campaigns = database.getAll()
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    init {
-        initializeCampaign()
-    }
-
-    private fun initializeCampaign() {
-        uiScope.launch {
-            campaign.value = getCampaignFromDatabase()
-        }
-    }
-
-    private suspend fun getCampaignFromDatabase(): Campaign? {
-        return withContext(Dispatchers.IO) {
-            var campaign = database.getById(1)
-            campaign
-        }
-    }
-
-    fun createNewCampaign() {
-        uiScope.launch {
-            val c = Campaign(0, "Test last campaign", "Lorem ipsum dolor sit amet")
-            create(c)
-        }
-    }
-
-    private suspend fun create(campaign: Campaign) {
-        withContext(Dispatchers.IO) {
-            database.insert(campaign)
-        }
-    }
-
+    // Navigation for npc fragment
     private val _navigateToNpc = MutableLiveData<Long>()
         val navigateToNpc
             get() = _navigateToNpc
@@ -58,8 +25,17 @@ class CampaignViewModel(
         _navigateToNpc.value = null
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    // Navigation for create campaign fragment
+    private val _navigateToCreate = MutableLiveData<Boolean>()
+        val navigateToCreate
+            get() = _navigateToCreate
+
+    fun onCreateClicked(bool: Boolean) {
+        _navigateToCreate.value = bool
     }
+
+    fun onCreateNavigated() {
+        _navigateToCreate.value = null
+    }
+
 }

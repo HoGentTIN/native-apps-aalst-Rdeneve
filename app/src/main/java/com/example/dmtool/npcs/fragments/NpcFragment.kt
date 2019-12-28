@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.dmtool.DmDatabase
 
 import com.example.dmtool.R
@@ -47,9 +48,22 @@ class NpcFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.npcViewModel = viewModel
 
-        // Adapter voor recycler viewmet click listener
+        // Adapter voor recycler view met click listener
         val adapter = NpcAdapter(NpcListClickListener {
-            npcId -> Toast.makeText(context, "NpcId: ${npcId}", Toast.LENGTH_SHORT).show()
+            npcId -> Toast.makeText(context, "NpcId: $npcId", Toast.LENGTH_SHORT).show()
+        })
+
+
+        binding.create.setOnClickListener {
+            viewModel.onCreateClicked(campaignId)
+        }
+
+        viewModel.navigateToCreate.observe(this, Observer { campaign ->
+            campaign?.let {
+                this.findNavController().navigate(
+                    NpcFragmentDirections.actionNpcFragmentToCreateNpcFragment(campaign)
+                )
+            }
         })
 
         binding.npcList.adapter = adapter

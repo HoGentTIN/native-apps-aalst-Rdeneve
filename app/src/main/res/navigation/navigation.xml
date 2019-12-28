@@ -8,19 +8,51 @@
     <fragment
         android:id="@+id/campaign"
         android:name="com.example.dmtool.campaigns.fragments.CampaignFragment"
-        android:label="campaign_fragment"
+        android:label="Campaigns"
         tools:layout="@layout/fragment_campaign" >
         <action
             android:id="@+id/action_campaign_to_npcFragment"
             app:destination="@id/npcFragment" />
+        <action
+            android:id="@+id/action_campaign_to_createCampaignFragment"
+            app:destination="@id/createCampaignFragment" />
     </fragment>
     <fragment
         android:id="@+id/npcFragment"
         android:name="com.example.dmtool.npcs.fragments.NpcFragment"
-        android:label="NpcFragment"
+        android:label="Npcs"
         tools:layout="@layout/fragment_npc">
         <argument
             android:name="campaignId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_npcFragment_to_createNpcFragment"
+            app:destination="@id/createNpcFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCampaignFragment"
+        android:name="com.example.dmtool.campaigns.fragments.CreateCampaignFragment"
+        android:label="Create Campaign"
+        tools:layout="@layout/fragment_create_campaign">
+        <action
+            android:id="@+id/action_createCampaignFragment_to_campaign"
+            app:destination="@id/campaign"
+            app:popUpTo="@id/campaign"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/createNpcFragment"
+        android:name="com.example.dmtool.npcs.fragments.CreateNpcFragment"
+        android:label="Create Npc"
+        tools:layout="@layout/fragment_create_npc">
+        <argument
+            android:name="campaignId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_createNpcFragment_to_npcFragment"
+            app:destination="@id/npcFragment"
+            app:popUpTo="@id/npcFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
