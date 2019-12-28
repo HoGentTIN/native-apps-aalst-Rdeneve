@@ -15,7 +15,6 @@ class CampaignAdapter(val clickListener: CampaignListClickListener) : ListAdapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
         holder.bind(getItem(position)!!, clickListener)
     }
 

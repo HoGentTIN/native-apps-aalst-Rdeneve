@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/campaign"
-        android:name="com.example.dmtool.campaigns.fragments.Campaign"
+        android:name="com.example.dmtool.campaigns.fragments.CampaignFragment"
         android:label="campaign_fragment"
-        tools:layout="@layout/campaign_fragment" />
+        tools:layout="@layout/fragment_campaign" >
+        <action
+            android:id="@+id/action_campaign_to_npcFragment"
+            app:destination="@id/npcFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/npcFragment"
+        android:name="com.example.dmtool.npcs.fragments.NpcFragment"
+        android:label="NpcFragment"
+        tools:layout="@layout/fragment_npc">
+        <argument
+            android:name="campaignId"
+            app:argType="long" />
+    </fragment>
 </navigation>

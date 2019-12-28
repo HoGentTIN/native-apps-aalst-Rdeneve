@@ -2,7 +2,6 @@ package com.example.dmtool.campaigns.fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.dmtool.DmDatabase
 
 import com.example.dmtool.R
@@ -17,9 +17,9 @@ import com.example.dmtool.campaigns.CampaignAdapter
 import com.example.dmtool.campaigns.CampaignListClickListener
 import com.example.dmtool.campaigns.viewModels.CampaignViewModel
 import com.example.dmtool.campaigns.viewModels.CampaignViewModelFactory
-import com.example.dmtool.databinding.CampaignFragmentBinding
+import com.example.dmtool.databinding.FragmentCampaignBinding
 
-class Campaign : Fragment() {
+class CampaignFragment : Fragment() {
 
     /* companion object {
         fun newInstance() = Campaign()
@@ -27,16 +27,14 @@ class Campaign : Fragment() {
     private lateinit var viewModelFactory: CampaignViewModelFactory
     private lateinit var viewModel: CampaignViewModel
 
-    private lateinit var binding: CampaignFragmentBinding
+    private lateinit var binding: FragmentCampaignBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.campaign_fragment, container, false)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_campaign, container, false)
         val application = requireNotNull(this.activity).application
-
         val dataSource = DmDatabase.getInstance(application).campaignDao
 
         // Create viewmodel
@@ -45,14 +43,25 @@ class Campaign : Fragment() {
             .get(CampaignViewModel::class.java)
 
         // Nodig voor live data updates
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
         binding.campaignViewModel = viewModel
 
+        //Adapter voor recyccler view met click listener voor navigatie naar NpcFragment
         val adapter = CampaignAdapter(CampaignListClickListener {
-            campaignId ->  Toast.makeText(context, "$campaignId", Toast.LENGTH_SHORT).show()
+            campaignId -> viewModel.onCampaignClicked(campaignId)
         })
         binding.campaignList.adapter = adapter
 
+        viewModel.navigateToNpc.observe(this, Observer { campaign ->
+            campaign?.let {
+                this.findNavController().navigate(
+                    CampaignFragmentDirections.actionCampaignToNpcFragment(campaign)
+                )
+                viewModel.onNpcNavigated()
+            }
+        })
+
+        // Dynamic refreshing for recycler view
         viewModel.campaigns.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)

@@ -1,9 +1,7 @@
 package com.example.dmtool.campaigns.viewModels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dmtool.campaigns.database.Campaign
 import com.example.dmtool.campaigns.database.CampaignDao
@@ -48,9 +46,20 @@ class CampaignViewModel(
         }
     }
 
+    private val _navigateToNpc = MutableLiveData<Long>()
+        val navigateToNpc
+            get() = _navigateToNpc
+
+    fun onCampaignClicked(id: Long) {
+        _navigateToNpc.value = id
+    }
+
+    fun onNpcNavigated() {
+        _navigateToNpc.value = null
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
-
 }
