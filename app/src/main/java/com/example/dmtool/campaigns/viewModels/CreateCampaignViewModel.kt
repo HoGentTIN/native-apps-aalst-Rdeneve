@@ -4,13 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.dmtool.campaigns.database.Campaign
-import com.example.dmtool.campaigns.database.CampaignDao
-import kotlinx.coroutines.*
+import com.example.dmtool.campaigns.repository.CampaignRepository
+import com.example.dmtool.shared.getDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CreateCampaignViewModel(
-    val database: CampaignDao,
      application: Application
 ) : AndroidViewModel(application) {
+    private val campaignRepository = CampaignRepository(getDatabase(application))
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -25,15 +29,9 @@ class CreateCampaignViewModel(
     fun createNewCampaign(title: String, description: String) {
         uiScope.launch {
             val c = Campaign(0, title, description)
-            create(c)
-            _navigateToCampaign.value = true
+            campaignRepository.create(c)
         }
-    }
-
-    private suspend fun create(campaign: Campaign) {
-        withContext(Dispatchers.IO) {
-            database.insert(campaign)
-        }
+        _navigateToCampaign.value = true
     }
 
     override fun onCleared() {

@@ -1,17 +1,15 @@
 package com.example.dmtool.campaigns.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.dmtool.DmDatabase
-
 import com.example.dmtool.R
 import com.example.dmtool.campaigns.CampaignAdapter
 import com.example.dmtool.campaigns.CampaignListClickListener
@@ -32,10 +30,8 @@ class CampaignFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_campaign, container, false)
         val application = requireNotNull(this.activity).application
-        val dataSource = DmDatabase.getInstance(application).campaignDao
-
         // Create viewmodel
-        viewModelFactory = CampaignViewModelFactory(dataSource, application)
+        viewModelFactory = CampaignViewModelFactory(application)
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(CampaignViewModel::class.java)
 
@@ -49,6 +45,7 @@ class CampaignFragment : Fragment() {
         })
         binding.campaignList.adapter = adapter
 
+        // Navigation observers
         viewModel.navigateToNpc.observe(this, Observer { campaign ->
             campaign?.let {
                 this.findNavController().navigate(
@@ -66,6 +63,14 @@ class CampaignFragment : Fragment() {
             }
         })
 
+
+        // NetworkError observer
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) onNetworkError()
+            }
+        })
+
         // Dynamic refreshing for recycler view
         viewModel.campaigns.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -74,5 +79,9 @@ class CampaignFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    private fun onNetworkError() {
+        Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
     }
 }

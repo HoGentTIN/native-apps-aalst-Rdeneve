@@ -15,6 +15,9 @@ data class Npc(
     var npcId: Long = 0L,
     var campaignId: Long,
     var name: String,
+    var type: String,
+    var alignment: String,
+    var size: String,
     var location: String,
     var organization: String,
     var history: String

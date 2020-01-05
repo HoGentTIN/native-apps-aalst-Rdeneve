@@ -8,9 +8,12 @@ buildscript {
         coroutine_version = '1.0.0'
         gradle_version = '3.3.0'
         navigation_version = '1.0.0'
-        material_version = '1.0.0'
+        material_version = '1.2.0-alpha03'
         junit_version = '4.12'
         lifecycle_version = '2.1.0'
+        moshi_version = "1.8.0"
+        retrofit_version = "2.5.0"
+        retrofit_coroutines_adapter_version = "0.9.2"
         dataBindingCompilerVersion = gradle_version
     }
     repositories {

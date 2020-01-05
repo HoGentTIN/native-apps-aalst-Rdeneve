@@ -14,8 +14,8 @@ interface NpcDao {
     @Insert
     fun insert(npc: Npc)
 
-    @Update
-    fun update(npc: Npc)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(npcs: List<Npc>)
 
     @Delete
     fun delete(npc: Npc)

@@ -35,6 +35,7 @@
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/list_item_campaign_icon_description"
                 app:srcCompat="@drawable/ic_d20"
+                android:tint="@color/colorAccent"
                 tools:srcCompat="@drawable/ic_d20" />
 
             <LinearLayout

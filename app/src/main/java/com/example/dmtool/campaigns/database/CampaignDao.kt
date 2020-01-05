@@ -15,8 +15,8 @@ interface CampaignDao  {
     @Insert
     fun insert(campaign: Campaign)
 
-    @Update
-    fun update(campaign: Campaign)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(campaigns: List<Campaign>)
 
     @Delete
     fun delete(campaign: Campaign)

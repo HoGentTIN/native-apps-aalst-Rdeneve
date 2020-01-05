@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_npcFragment_to_createNpcFragment"
             app:destination="@id/createNpcFragment" />
+        <action
+            android:id="@+id/action_npcFragment_to_npcDetailFragment"
+            app:destination="@id/npcDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/createCampaignFragment"
@@ -54,5 +57,20 @@
             app:destination="@id/npcFragment"
             app:popUpTo="@id/npcFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/npcDetailFragment"
+        android:name="com.example.dmtool.npcs.fragments.NpcDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_npc_detail">
+        <argument
+            android:name="npcId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_npcDetailFragment_to_npcFragment"
+            app:destination="@id/npcFragment" />
+        <argument
+            android:name="campaignId"
+            app:argType="long" />
     </fragment>
 </navigation>

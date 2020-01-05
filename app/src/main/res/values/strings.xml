@@ -6,12 +6,16 @@
     <string name="create_campaign_description">Campaign Description</string>
     <string name="create_campaign_button_text">Create campaign</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_npc_name">Npc name</string>
     <string name="create_npc_organization">Npc organization</string>
     <string name="create_npc_location">Npc location</string>
     <string name="create_npc_history">Npc history</string>
     <string name="create_npc_button_text">Create Npc</string>
+    <string name="create_npc_type">Npc type</string>
+    <string name="create_npc_size">Npc size</string>
+    <string name="create_npc_alignment">Npc alignment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -9,30 +9,33 @@ import com.example.dmtool.npcs.repository.NpcRepository
 import com.example.dmtool.shared.getDatabase
 import kotlinx.coroutines.*
 
-class CreateNpcViewModel (
-    application: Application,
-    private val campaignId: Long
+class NpcDetailViewModel(
+     application: Application,
+     npcId: Long,
+     campaignId: Long
 ): AndroidViewModel(application) {
     private val npcRepository = NpcRepository(getDatabase(application), campaignId)
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    var npc = MutableLiveData<Npc?>()
 
-    private val _navigateToNpc = MutableLiveData<Boolean>()
-        val navigateToNpc
-            get() = _navigateToNpc
-
-    fun onNpcNavigated() {
-        _navigateToNpc.value = null
+    init {
+        initializeNpc(npcId)
     }
 
-    fun createNewNpc(
-        npc: Npc
-    ) {
+    private fun initializeNpc(npcId: Long) {
         uiScope.launch {
-            npcRepository.create(npc)
-            _navigateToNpc.value = true
+            npc.value = getFromDb(npcId)
         }
     }
+
+    private suspend fun getFromDb(npcId: Long): Npc? {
+        return withContext(Dispatchers.IO) {
+            val npc = npcRepository.getById(npcId)
+            npc
+        }
+    }
+
 
     override fun onCleared() {
         super.onCleared()

@@ -2,21 +2,19 @@ package com.example.dmtool.campaigns.fragments
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.dmtool.DmDatabase
-
 import com.example.dmtool.R
 import com.example.dmtool.campaigns.viewModels.CreateCampaignViewModel
 import com.example.dmtool.campaigns.viewModels.CreateCampaignViewModelFactory
 import com.example.dmtool.databinding.FragmentCreateCampaignBinding
+import com.example.dmtool.shared.DmDatabase
 
 /**
  * A simple [Fragment] subclass.
@@ -33,10 +31,9 @@ class CreateCampaignFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_campaign, container, false)
         val application = requireNotNull(this.activity).application
-        val dataSource = DmDatabase.getInstance(application).campaignDao
 
         // Create viewmodel
-        viewModelFactory = CreateCampaignViewModelFactory(dataSource, application)
+        viewModelFactory = CreateCampaignViewModelFactory(application)
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(CreateCampaignViewModel::class.java)
 

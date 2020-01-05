@@ -2,20 +2,47 @@ package com.example.dmtool.campaigns.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.dmtool.campaigns.database.Campaign
-import com.example.dmtool.campaigns.database.CampaignDao
-import kotlinx.coroutines.*
+import com.example.dmtool.campaigns.repository.CampaignRepository
+import com.example.dmtool.shared.getDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class CampaignViewModel(
-    val database: CampaignDao,
     application: Application
 ) : AndroidViewModel(application) {
-    var campaigns = database.getAll()
+
+    private val campaignRepository = CampaignRepository(getDatabase(application))
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    var campaigns = campaignRepository.campaigns
+
+    init {
+        refreshData()
+    }
+
+    private val _eventNetworkError = MutableLiveData<Boolean>()
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
+    private fun refreshData() = uiScope.launch {
+        try {
+            campaignRepository.refreshCampaigns()
+            _eventNetworkError.value = false
+        } catch (e: IOException) {
+            _eventNetworkError.value = true
+        }
+    }
+
     // Navigation for npc fragment
     private val _navigateToNpc = MutableLiveData<Long>()
-        val navigateToNpc
-            get() = _navigateToNpc
+    val navigateToNpc
+        get() = _navigateToNpc
 
     fun onCampaignClicked(id: Long) {
         _navigateToNpc.value = id
