@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class CampaignViewModelFactory(
     private val application: Application
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CampaignViewModel::class.java)) {

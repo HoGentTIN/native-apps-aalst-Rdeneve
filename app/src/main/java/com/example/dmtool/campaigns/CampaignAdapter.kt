@@ -18,7 +18,7 @@ class CampaignAdapter(val clickListener: CampaignListClickListener) : ListAdapte
         holder.bind(getItem(position)!!, clickListener)
     }
 
-    class ViewHolder private constructor(val binding: ListItemCampaignBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ListItemCampaignBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Campaign, clickListener: CampaignListClickListener) {
             binding.campaign = item
             binding.clickListener = clickListener
@@ -35,7 +35,7 @@ class CampaignAdapter(val clickListener: CampaignListClickListener) : ListAdapte
     }
 }
 
-class CampaignDiffCallback: DiffUtil.ItemCallback<Campaign>() {
+class CampaignDiffCallback : DiffUtil.ItemCallback<Campaign>() {
     override fun areItemsTheSame(oldItem: Campaign, newItem: Campaign): Boolean {
         return oldItem.campaignId == newItem.campaignId
     }

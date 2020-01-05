@@ -1,6 +1,5 @@
 package com.example.dmtool.npcs.fragments
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,8 @@ class NpcFragment : Fragment() {
     private lateinit var binding: FragmentNpcBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_npc, container, false)

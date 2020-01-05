@@ -8,7 +8,7 @@ import com.example.dmtool.shared.asNpc
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class NpcRepository (private val database: DmDatabase, private val campaignId: Long) {
+class NpcRepository(private val database: DmDatabase, private val campaignId: Long) {
 
     val npcs = database.npcDao.getAllForCampaign(campaignId)
 

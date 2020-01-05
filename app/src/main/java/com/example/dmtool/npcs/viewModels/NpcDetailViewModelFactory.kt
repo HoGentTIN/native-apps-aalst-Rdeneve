@@ -3,13 +3,12 @@ package com.example.dmtool.npcs.viewModels
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.dmtool.npcs.database.NpcDao
 
 class NpcDetailViewModelFactory(
     private val application: Application,
     private val npcId: Long,
     private val campaignId: Long
-):ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NpcDetailViewModel::class.java)) {

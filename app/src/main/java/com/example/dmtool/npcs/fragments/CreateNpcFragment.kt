@@ -1,6 +1,5 @@
 package com.example.dmtool.npcs.fragments
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.dmtool.databinding.FragmentCreateNpcBinding
 import com.example.dmtool.npcs.database.Npc
 import com.example.dmtool.npcs.viewModels.CreateNpcViewModel
 import com.example.dmtool.npcs.viewModels.CreateNpcViewModelFactory
-import com.example.dmtool.shared.DmDatabase
 
 /**
  * A simple [Fragment] subclass.
@@ -27,7 +25,8 @@ class CreateNpcFragment : Fragment() {
     private lateinit var binding: FragmentCreateNpcBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_npc, container, false)
@@ -72,15 +71,13 @@ class CreateNpcFragment : Fragment() {
             }
         })
 
-
-
         return binding.root
     }
 
     private fun convertValuesToNpc(campaignId: Long): Npc {
         val name = binding.npcName.text.toString()
         val size = binding.sizeDropdown.text.toString()
-        val alignment =  binding.alignmentDropdown.text.toString()
+        val alignment = binding.alignmentDropdown.text.toString()
         val type = binding.npcType.text.toString()
         val organization = binding.npcOrganization.text.toString()
         val location = binding.npcLocation.text.toString()
@@ -88,7 +85,4 @@ class CreateNpcFragment : Fragment() {
 
         return Npc(0, campaignId, name, type, alignment, size, location, organization, history)
     }
-
-
-
 }

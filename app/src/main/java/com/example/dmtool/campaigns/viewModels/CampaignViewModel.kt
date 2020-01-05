@@ -64,5 +64,4 @@ class CampaignViewModel(
     fun onCreateNavigated() {
         _navigateToCreate.value = null
     }
-
 }

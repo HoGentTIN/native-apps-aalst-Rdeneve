@@ -15,7 +15,7 @@ import java.io.IOException
 class NpcViewModel(
     application: Application,
     campaignId: Long
-): AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     private val npcRepository = NpcRepository(getDatabase(application), campaignId)
     private val viewModelJob = Job()

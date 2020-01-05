@@ -1,6 +1,4 @@
 package com.example.dmtool.campaigns.fragments
-
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +12,6 @@ import com.example.dmtool.R
 import com.example.dmtool.campaigns.viewModels.CreateCampaignViewModel
 import com.example.dmtool.campaigns.viewModels.CreateCampaignViewModelFactory
 import com.example.dmtool.databinding.FragmentCreateCampaignBinding
-import com.example.dmtool.shared.DmDatabase
-
 /**
  * A simple [Fragment] subclass.
  */
@@ -26,7 +22,8 @@ class CreateCampaignFragment : Fragment() {
     private lateinit var binding: FragmentCreateCampaignBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_campaign, container, false)
@@ -55,6 +52,4 @@ class CreateCampaignFragment : Fragment() {
 
         return binding.root
     }
-
-
 }

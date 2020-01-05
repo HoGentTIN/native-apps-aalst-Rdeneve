@@ -51,5 +51,5 @@ interface DmToolApiService {
 }
 
 object DmToolApi {
-    val retrofitService: DmToolApiService by lazy { retrofit.create(DmToolApiService::class.java)}
+    val retrofitService: DmToolApiService by lazy { retrofit.create(DmToolApiService::class.java) }
 }

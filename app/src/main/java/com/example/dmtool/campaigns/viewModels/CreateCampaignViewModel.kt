@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class CreateCampaignViewModel(
-     application: Application
+    application: Application
 ) : AndroidViewModel(application) {
     private val campaignRepository = CampaignRepository(getDatabase(application))
     private var viewModelJob = Job()

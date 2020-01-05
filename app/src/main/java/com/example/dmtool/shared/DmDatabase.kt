@@ -22,7 +22,7 @@ abstract class DmDatabase : RoomDatabase() {
                 var instance =
                     INSTANCE
 
-                if(instance == null) {
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         DmDatabase::class.java,
@@ -35,7 +35,5 @@ abstract class DmDatabase : RoomDatabase() {
                 return instance
             }
         }
-
-
     }
 }

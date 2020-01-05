@@ -8,7 +8,7 @@ import com.example.dmtool.shared.asCampaign
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CampaignRepository (private val database: DmDatabase) {
+class CampaignRepository(private val database: DmDatabase) {
 
     val campaigns = database.campaignDao.getAll()
 

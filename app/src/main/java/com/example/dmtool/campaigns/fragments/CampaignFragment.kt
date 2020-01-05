@@ -25,7 +25,8 @@ class CampaignFragment : Fragment() {
     private lateinit var binding: FragmentCampaignBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_campaign, container, false)
@@ -39,7 +40,7 @@ class CampaignFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.campaignViewModel = viewModel
 
-        //Adapter voor recycler view met click listener voor navigatie naar NpcFragment
+        // Adapter voor recycler view met click listener voor navigatie naar NpcFragment
         val adapter = CampaignAdapter(CampaignListClickListener {
             campaignId -> viewModel.onCampaignClicked(campaignId)
         })
@@ -62,7 +63,6 @@ class CampaignFragment : Fragment() {
                 viewModel.onCreateNavigated()
             }
         })
-
 
         // NetworkError observer
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {

@@ -37,5 +37,4 @@ class DMToolTest {
         assertEquals(campaign?.title, "Title")
         assertEquals(campaign?.description, "Description")
     }
-
 }

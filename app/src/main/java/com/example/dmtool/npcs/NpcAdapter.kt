@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dmtool.databinding.ListItemNpcBinding
 import com.example.dmtool.npcs.database.Npc
 
-class NpcAdapter(val clickListener: NpcListClickListener): ListAdapter<Npc, NpcAdapter.ViewHolder>(NpcDiffCallback()) {
+class NpcAdapter(val clickListener: NpcListClickListener) : ListAdapter<Npc, NpcAdapter.ViewHolder>(NpcDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NpcAdapter.ViewHolder {
         return ViewHolder.from(parent)
@@ -18,7 +18,7 @@ class NpcAdapter(val clickListener: NpcListClickListener): ListAdapter<Npc, NpcA
         holder.bind(getItem(position)!!, clickListener)
     }
 
-    class ViewHolder private constructor(val binding: ListItemNpcBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ListItemNpcBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Npc, clickListener: NpcListClickListener) {
             binding.npc = item
             binding.clickListener = clickListener
@@ -34,7 +34,7 @@ class NpcAdapter(val clickListener: NpcListClickListener): ListAdapter<Npc, NpcA
     }
 }
 
-class NpcDiffCallback: DiffUtil.ItemCallback<Npc>() {
+class NpcDiffCallback : DiffUtil.ItemCallback<Npc>() {
     override fun areItemsTheSame(oldItem: Npc, newItem: Npc): Boolean {
         return oldItem.npcId == newItem.npcId
     }

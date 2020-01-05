@@ -59,5 +59,5 @@ fun TextView.setNpcOrganization(item: Npc?) {
 
 @BindingAdapter("npcHistory")
 fun TextView.setNpcHistory(item: Npc?) {
-    item?.let { text = item.history}
+    item?.let { text = item.history }
 }

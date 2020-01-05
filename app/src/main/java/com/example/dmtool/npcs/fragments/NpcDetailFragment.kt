@@ -1,6 +1,5 @@
 package com.example.dmtool.npcs.fragments
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.example.dmtool.R
 import com.example.dmtool.databinding.FragmentNpcDetailBinding
 import com.example.dmtool.npcs.viewModels.NpcDetailViewModel
 import com.example.dmtool.npcs.viewModels.NpcDetailViewModelFactory
-import com.example.dmtool.shared.DmDatabase
 
 /**
  * A simple [Fragment] subclass.
@@ -23,7 +21,8 @@ class NpcDetailFragment : Fragment() {
     private lateinit var binding: FragmentNpcDetailBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_npc_detail, container, false)
@@ -38,9 +37,6 @@ class NpcDetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-
         return binding.root
     }
-
-
 }

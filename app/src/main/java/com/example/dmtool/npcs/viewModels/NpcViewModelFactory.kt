@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 class NpcViewModelFactory(
     private val application: Application,
     private val campaignId: Long
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NpcViewModel::class.java)) {
